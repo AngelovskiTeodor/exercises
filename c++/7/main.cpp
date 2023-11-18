@@ -87,6 +87,36 @@ public:
         return newFrac;
     }
 
+    //  fraction and integer
+    Dropki operator + (const int num) {
+        long newNumerator = this->getNumerator() + num*this->getDenominator();
+        long newDenominator = this->getDenominator();
+        Dropki newFrac = Dropki(newNumerator, newDenominator);
+        return newFrac;
+    }
+
+    Dropki operator - (const int num) {
+        long newNumerator = this->getNumerator() - num*this->getDenominator();
+        long newDenominator = this->getDenominator();
+        Dropki newFrac = Dropki(newNumerator, newDenominator);
+        return newFrac;
+    }
+
+    Dropki operator * (const int num) {
+        long newNumerator = this->getNumerator() * num;
+        long newDenominator = this->getDenominator();
+        Dropki newFrac = Dropki(newNumerator, newDenominator);
+        return newFrac;
+    }
+
+    Dropki operator / (const int num) {
+        long newNumerator = this->getNumerator();
+        long newDenominator = this->getDenominator() * num;
+        Dropki newFrac = Dropki(newNumerator, newDenominator);
+        return newFrac;
+    }
+    //  end fraction and integer
+
     friend ostream& operator<<(ostream& os, Dropki const& frac) {
         os << frac.getNumerator() <<"/"<< frac.getDenominator();
         return os;
@@ -141,8 +171,41 @@ void divide() {
     cout << frac1 << "/" << frac2 << "=" << (frac1/frac2) << endl;
 }
 
+//  fraction and integer
+void addInt() {
+    cout << "Enter the first fraction: " << endl;
+    Dropki frac1 = readFrac();
+    cout << "Enter the integer to add: " << endl;
+    int num; cin >> num;
+    cout << frac1 << "+" << num << "=" << (frac1+num) << endl;
+}
+
+void substractInt() {
+    cout << "Enter the first fraction: " << endl;
+    Dropki frac1 = readFrac();
+    cout << "Enter the integer to substract: " << endl;
+    int num; cin >> num;
+    cout << frac1 << "-" << num << "=" << (frac1-num) << endl;
+}
+
+void multiplyInt() {
+    cout << "Enter the first fraction: " << endl;
+    Dropki frac1 = readFrac();
+    cout << "Enter the integer to multiply: " << endl;
+    int num; cin >> num;
+    cout << frac1 << "*" << num << "=" << (frac1*num) << endl;
+}
+
+void divideInt() {
+    cout << "Enter the first fraction: " << endl;
+    Dropki frac1 = readFrac();
+    cout << "Enter the integer to divide: " << endl;
+    int num; cin >> num;
+    cout << frac1 << "/" << num << "=" << (frac1/num) << endl;
+}
+
 void selector(int choice) {
-    void (*options[4]) () = {add, substract, multiply, divide};
+    void (*options[8]) () = {add, substract, multiply, divide, addInt, substractInt, multiplyInt, divideInt};
     options[choice]();
 }
 
@@ -152,7 +215,11 @@ void menu() {
     cout << "2 Substract fractions" << endl;
     cout << "3 Multiply fractions" << endl;
     cout << "4 Divide fractions" << endl;
-    cout << "5 Exit" << endl;
+    cout << "5 Add fractions" << endl;
+    cout << "6 Substract fractions" << endl;
+    cout << "7 Multiply fractions" << endl;
+    cout << "8 Divide fractions" << endl;
+    cout << "9 Exit" << endl;
 }
 
 void fractionsDriver() {
@@ -161,7 +228,7 @@ void fractionsDriver() {
         menu();
         cin >> choice;
         selector(choice-1);
-    } while (choice != 5);
+    } while (choice != 9);
 }
 
 int main()
